@@ -26,19 +26,6 @@ const PlayerSquare = ({
         <View style={styles.buttonContainer}>
           <View>
             <Button
-              title="+"
-              onPress={() => {
-                const newPlayers = [...players];
-                newPlayers[player.index].life =
-                  newPlayers[player.index].life + 1;
-                setPlayers(newPlayers);
-              }}
-              color="green"
-            />
-          </View>
-          <Text style={styles.lifeLabel}>{player.life}</Text>
-          <View>
-            <Button
               title="-"
               onPress={() => {
                 const newPlayers = [...players];
@@ -47,6 +34,19 @@ const PlayerSquare = ({
                 setPlayers(newPlayers);
               }}
               color="red"
+            />
+          </View>
+          <Text style={styles.lifeLabel}>{player.life}</Text>
+          <View>
+            <Button
+              title="+"
+              onPress={() => {
+                const newPlayers = [...players];
+                newPlayers[player.index].life =
+                  newPlayers[player.index].life + 1;
+                setPlayers(newPlayers);
+              }}
+              color="green"
             />
           </View>
         </View>
