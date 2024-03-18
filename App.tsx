@@ -23,7 +23,7 @@ export default function App() {
         <Stack.Screen
           name="Game"
           component={Game}
-          options={{ statusBarHidden: true, title: "" }}
+          options={{ statusBarHidden: true, title: "", headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
