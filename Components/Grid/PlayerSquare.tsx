@@ -101,6 +101,8 @@ const styles = StyleSheet.create({
   lifeLabel: {
     fontSize: 80,
     fontFamily: "serif",
+    textShadowColor: "white",
+    textShadowRadius: 10,
   },
   background: {
     opacity: 0.9,
