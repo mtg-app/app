@@ -1,5 +1,5 @@
 import { Button, StyleSheet, Text, View } from "react-native";
-import { Player } from "../../Pages/Game";
+import { Player } from "../../screens/Game";
 import { getSquareDirection } from "./helpers";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";

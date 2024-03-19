@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
-import { Player } from "../../Pages/Game";
+import { Player } from "../../screens/Game";
 import { getRowsAndCols } from "./helpers";
 import PlayerSquare from "./PlayerSquare";
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PlayerGrid from "../Components/Grid/PlayerGrid";
+import PlayerGrid from "../components/grid/PlayerGrid";
 import { getRandomColor } from "../color-utils";
 
 export interface Player {

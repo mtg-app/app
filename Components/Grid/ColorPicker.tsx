@@ -1,5 +1,5 @@
 import { Button, View, StyleSheet } from "react-native";
-import { Player } from "../../Pages/Game";
+import { Player } from "../../screens/Game";
 import {
   blackGradient,
   blueGradient,
