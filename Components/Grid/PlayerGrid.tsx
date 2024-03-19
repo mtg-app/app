@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "purple",
     borderColor: "black",
     borderWidth: 1,
     width: "100%",

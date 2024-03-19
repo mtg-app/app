@@ -1,6 +1,9 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 import { Player } from "../../Pages/Game";
 import { getSquareDirection } from "./helpers";
+import { LinearGradient } from "expo-linear-gradient";
+import { useState } from "react";
+import { ColorPicker } from "./ColorPicker";
 
 interface PlayerSquareProps {
   players: Player[];
@@ -19,39 +22,61 @@ const PlayerSquare = ({
 }: PlayerSquareProps) => {
   const squareDir = getSquareDirection(rowIndex, colIndex, players.length);
 
+  const [isColorChangingOpen, setIsColorChangingOpen] = useState(false);
+
   return (
-    <View style={styles.square}>
-      <View style={squareDirStyles(squareDir).squareContent}>
-        <Text>Player {player.index + 1}</Text>
-        <View style={styles.buttonContainer}>
-          <View>
-            <Button
-              title="-"
-              onPress={() => {
-                const newPlayers = [...players];
-                newPlayers[player.index].life =
-                  newPlayers[player.index].life - 1;
-                setPlayers(newPlayers);
-              }}
-              color="red"
+    <LinearGradient colors={player.color} style={styles.background}>
+      <View style={styles.square}>
+        <View style={squareDirStyles(squareDir).squareContent}>
+          {isColorChangingOpen ? (
+            <ColorPicker
+              setIsColorChangingOpen={setIsColorChangingOpen}
+              player={player}
+              players={players}
+              setPlayers={setPlayers}
             />
-          </View>
-          <Text style={styles.lifeLabel}>{player.life}</Text>
-          <View>
-            <Button
-              title="+"
-              onPress={() => {
-                const newPlayers = [...players];
-                newPlayers[player.index].life =
-                  newPlayers[player.index].life + 1;
-                setPlayers(newPlayers);
-              }}
-              color="green"
-            />
-          </View>
+          ) : (
+            <View>
+              {/* TODO: need a better design for this button */}
+              <View style={styles.colorButton}>
+                <Button
+                  title="C"
+                  onPress={(prevState) => setIsColorChangingOpen(!!prevState)}
+                />
+              </View>
+              {/* <Text>Player {player.index + 1}</Text> */}
+              <View style={styles.buttonContainer}>
+                <View>
+                  <Button
+                    title="-"
+                    onPress={() => {
+                      const newPlayers = [...players];
+                      newPlayers[player.index].life =
+                        newPlayers[player.index].life - 1;
+                      setPlayers(newPlayers);
+                    }}
+                    color="red"
+                  />
+                </View>
+                <Text style={styles.lifeLabel}>{player.life}</Text>
+                <View>
+                  <Button
+                    title="+"
+                    onPress={() => {
+                      const newPlayers = [...players];
+                      newPlayers[player.index].life =
+                        newPlayers[player.index].life + 1;
+                      setPlayers(newPlayers);
+                    }}
+                    color="green"
+                  />
+                </View>
+              </View>
+            </View>
+          )}
         </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -60,7 +85,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "purple",
+    alignItems: "center",
     borderColor: "black",
     borderWidth: 1,
     width: "100%",
@@ -74,7 +99,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   lifeLabel: {
-    fontSize: 60,
+    fontSize: 80,
+    fontFamily: "serif",
+  },
+  background: {
+    opacity: 0.9,
+  },
+  colorButton: {
+    width: 30,
+    alignSelf: "center",
   },
 });
 
@@ -83,8 +116,6 @@ const squareDirStyles = (deg: "0deg" | "90deg" | "180deg" | "270deg") =>
   StyleSheet.create({
     squareContent: {
       display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
       justifyContent: "center",
       transform: [{ rotate: deg }],
     },

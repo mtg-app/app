@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { View } from "react-native";
 import PlayerGrid from "../Components/Grid/PlayerGrid";
+import { getRandomColor } from "../color-utils";
 
 export interface Player {
   index: number;
   life: number;
+  color: string[];
 }
 
 export default function Game({ navigation, route }: any) {
@@ -15,12 +16,9 @@ export default function Game({ navigation, route }: any) {
     Array.from({ length: playersParam }, (_, index) => ({
       index,
       life: startingLife,
+      color: getRandomColor(),
     }))
   );
 
-  return (
-    // <View>
-    <PlayerGrid players={players} setPlayers={setPlayers} />
-    // </View>
-  );
+  return <PlayerGrid players={players} setPlayers={setPlayers} />;
 }
