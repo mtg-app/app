@@ -6,9 +6,13 @@ export interface Player {
   index: number;
   life: number;
   color: string[];
+  dice?: {
+    number: number;
+    winner: boolean;
+  };
 }
 
-export default function Game({ navigation, route }: any) {
+export default function Game({ route }: any) {
   const playersParam = route.params.players;
   const startingLife = route.params.startingLife;
 

@@ -24,6 +24,24 @@ const PlayerSquare = ({
 
   const [isColorChangingOpen, setIsColorChangingOpen] = useState(false);
 
+  // render dice number if dice is being rolled
+  if (player.dice?.number) {
+    return (
+      <LinearGradient colors={player.color} style={styles.background}>
+        <View style={styles.square}>
+          <View style={squareDirStyles(squareDir).squareContent}>
+            {player.dice.winner && (
+              <Text style={styles.winnerLabel}>Winner!</Text>
+            )}
+            <View style={styles.centeredLabel}>
+              <Text style={styles.lifeLabel}>{player.dice.number}</Text>
+            </View>
+          </View>
+        </View>
+      </LinearGradient>
+    );
+  }
+
   return (
     <LinearGradient colors={player.color} style={styles.background}>
       <View style={styles.square}>
@@ -104,12 +122,23 @@ const styles = StyleSheet.create({
     textShadowColor: "white",
     textShadowRadius: 10,
   },
+  winnerLabel: {
+    fontSize: 40,
+    fontFamily: "serif",
+    textShadowColor: "white",
+    textShadowRadius: 10,
+  },
   background: {
     opacity: 0.9,
   },
   colorButton: {
     width: 30,
     alignSelf: "center",
+  },
+  centeredLabel: {
+    textAlign: "center",
+    alignContent: "center",
+    alignItems: "center",
   },
 });
 

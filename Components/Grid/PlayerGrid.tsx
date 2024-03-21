@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, Button } from "react-native";
 import { Player } from "../../screens/Game";
 import { getRowsAndCols } from "./helpers";
 import PlayerSquare from "./PlayerSquare";
@@ -39,8 +39,48 @@ const PlayerGrid = ({ players, setPlayers }: PlayerGridProps) => {
   const squareWidth = screenWidth / columns;
   const squareHeight = screenHeight / rows;
 
+  function rollDice() {
+    // roll dice for each player
+    let playersAndScores = players.map((player) => {
+      return {
+        playerIndex: player.index,
+        score: Math.floor(Math.random() * 6) + 1,
+      };
+    });
+
+    // find the player with the highest score, then return it
+    const highestScore = playersAndScores.reduce((prev, current) =>
+      prev.score > current.score ? prev : current
+    );
+
+    // set the dice number and winner and for each player
+    for (let i = 0; i < players.length; i++) {
+      setPlayers((prevPlayers: Player[]) => {
+        const newPlayers = [...prevPlayers];
+        newPlayers[i].dice = {
+          number: playersAndScores[i].score,
+          winner: players[i].index === highestScore?.playerIndex ? true : false,
+        };
+        return newPlayers;
+      });
+
+      // wait 3 seconds before clearing the dice value
+      setTimeout(() => {
+        setPlayers((prevPlayers: Player[]) => {
+          const newPlayers = [...prevPlayers];
+          newPlayers[i].dice = undefined;
+          return newPlayers;
+        });
+      }, 3000);
+    }
+  }
+
   return (
     <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <Button title="D" onPress={rollDice} />
+        {/* {players.length < 6 && <Button title="+" />} */}
+      </View>
       {[...Array(rows)].map((_, rowIndex) => (
         <View key={rowIndex} style={styles.row}>
           {[...Array(columns)].map((_, colIndex) => {
@@ -92,6 +132,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: "100%",
     height: "100%",
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+    alignItems: "center",
   },
 });
 
