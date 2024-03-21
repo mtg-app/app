@@ -3,13 +3,15 @@ import { View, StyleSheet, Dimensions, Button } from "react-native";
 import { Player } from "../../screens/Game";
 import { getRowsAndCols } from "./helpers";
 import PlayerSquare from "./PlayerSquare";
+import { getRandomColor } from "../../color-utils";
 
 interface PlayerGridProps {
   players: Player[];
   setPlayers: (players: Player[]) => void;
+  startingLife: number;
 }
 
-const PlayerGrid = ({ players, setPlayers }: PlayerGridProps) => {
+const PlayerGrid = ({ players, setPlayers, startingLife }: PlayerGridProps) => {
   const renderPlayerSquares = (
     player: Player,
     rowIndex: number,
@@ -75,11 +77,23 @@ const PlayerGrid = ({ players, setPlayers }: PlayerGridProps) => {
     }
   }
 
+  function addPlayer() {
+    setPlayers((prevPlayers: Player[]) => {
+      const newPlayers = [...prevPlayers];
+      newPlayers.push({
+        index: newPlayers.length,
+        life: startingLife,
+        color: getRandomColor(),
+      });
+      return newPlayers;
+    });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <Button title="D" onPress={rollDice} />
-        {/* {players.length < 6 && <Button title="+" />} */}
+        {players.length < 6 && <Button title="+" onPress={addPlayer} />}
       </View>
       {[...Array(rows)].map((_, rowIndex) => (
         <View key={rowIndex} style={styles.row}>

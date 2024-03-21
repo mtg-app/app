@@ -24,5 +24,11 @@ export default function Game({ route }: any) {
     }))
   );
 
-  return <PlayerGrid players={players} setPlayers={setPlayers} />;
+  return (
+    <PlayerGrid
+      players={players}
+      setPlayers={setPlayers}
+      startingLife={startingLife}
+    />
+  );
 }
