@@ -12,4 +12,9 @@ This app was bootstrapped using [Expo](https://docs.expo.dev/guides/typescript/)
 ## Run iOS locally
 
 npx expo install expo-dev-client
-eas build --local" || npx expo run:[android|ios]
+npx expo run ios
+
+## Deploy iOS/Android
+
+npm install -g eas-cli
+eas build

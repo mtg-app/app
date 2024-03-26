@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mtg.magic_app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,6 +37,11 @@
           "launchModeExperimental": "most-recent"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "249ff8c9-0909-4c3a-bd3a-f8791af57f99"
+      }
+    }
   }
 }

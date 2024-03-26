@@ -47,7 +47,8 @@ export default function PreGame({ navigation }: any) {
       {error && (
         <Text style={styles.errorLabel}>Please select valid inputs</Text>
       )}
-      <StatusBar style="auto" />
+      {/* Commented this out as there is a bug: https://github.com/expo/router/pull/773 and need to figure this on for iOS */}
+      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }

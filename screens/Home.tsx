@@ -20,7 +20,8 @@ export default function Home({ navigation }: any) {
           <Button title="Login" onPress={() => onClick("login")} color="red" />
         </View>
       </View>
-      <StatusBar style="auto" />
+      {/* Commented this out as there is a bug: https://github.com/expo/router/pull/773 and need to figure this on for iOS */}
+      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }
