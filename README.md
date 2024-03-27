@@ -10,11 +10,13 @@ This app was bootstrapped using [Expo](https://docs.expo.dev/guides/typescript/)
 - scan build QR code
 
 ## Run iOS locally
-
+```
 npx expo install expo-dev-client
 npx expo run ios
+```
 
 ## Deploy iOS/Android
-
+```
 npm install -g eas-cli
 eas build
+```
